@@ -9,7 +9,6 @@ searchbox.addEventListener('keypress', setQuery);
 function setQuery(evt) {
     if (evt.keyCode == 13){
         getResults(searchbox.value);
-        console.log(searchbox.value);
     }
 }
 
@@ -22,4 +21,32 @@ function getResults(querry) {
 
 function displayResults(weather){
     console.log(weather);
+    let city = document.querySelector('.Poloha .Mesto');
+    city.innerText = `${weather.name}, ${weather.sys.country}`;
+
+
+    let now = new Date();
+    let date = document.querySelector('.Poloha .Den');
+    date.innerText = dateBuilder(now);
+
+    let temp = document.querySelector('.Current .Teplota');
+    temp.innerHTML = `${Math.round(weather.main.temp)}<span>°c</span>`;
+  
+    let weather_el = document.querySelector('.Current .Pocasie');
+    weather_el.innerText = weather.weather[0].main;
+  
+    let hilow = document.querySelector('.Current .Naj-Min');
+    hilow.innerText = `${Math.round(weather.main.temp_min)}°c / ${Math.round(weather.main.temp_max)}°c`;
+}
+
+function dateBuilder(d){
+    let months = ["Január", "Február", "Marec", "April", "Máj", "Jún", "Júl", "August", "September", "Október", "November", "December"];
+    let days = ["Nedeľa", "Pondelok", "Utorok", "Streda", "Štvrtok", "Piatok", "Sobota"];
+
+    let day = days[d.getDay()];
+    let date = d.getDate();
+    let month = months[d.getMonth()];
+    let year = d.getFullYear();
+  
+    return `${day} ${date} ${month} ${year}`;
 }
