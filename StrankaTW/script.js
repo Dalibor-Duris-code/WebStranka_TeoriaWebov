@@ -13,7 +13,7 @@ function setQuery(evt) {
 }
 
 function getResults(querry) {
-    fetch(`${api.base}weather?q=${querry}&units=metric&APPID=${api.key}`)
+    fetch(`${api.base}weather?q=${querry}&exclude=daily&lang=sk&lang=en&units=metric&APPID=${api.key}`,)
     .then(weather=> {
         return weather.json();
     }).then(displayResults);
@@ -23,20 +23,33 @@ function displayResults(weather){
     console.log(weather);
     let city = document.querySelector('.Poloha .Mesto');
     city.innerText = `${weather.name}, ${weather.sys.country}`;
-
-
+    
     let now = new Date();
-    let date = document.querySelector('.Poloha .Den');
+    let date = document.querySelector('.Den');
     date.innerText = dateBuilder(now);
 
+    let time = document.querySelector('.Cas');
+    time.innerText = timeBuilder(now);
+
     let temp = document.querySelector('.Current .Teplota');
-    temp.innerHTML = `${Math.round(weather.main.temp)}<span>°c</span>`;
-  
-    let weather_el = document.querySelector('.Current .Pocasie');
-    weather_el.innerText = weather.weather[0].main;
-  
+    temp.innerHTML = `${Math.round(weather.main.temp)}<span>°C</span>`;
+    //let weather_el = document.querySelector('.Current .Pocasie');
+    //weather_el.innerText = weather.weather[0].main;
+
+    let ikona = document.querySelector(".Current .Icon");
+    ikona.src = "https://openweathermap.org/img/wn/" + weather.weather[0].icon + ".png";
+
     let hilow = document.querySelector('.Current .Naj-Min');
-    hilow.innerText = `${Math.round(weather.main.temp_min)}°c / ${Math.round(weather.main.temp_max)}°c`;
+    hilow.innerText = `${Math.round(weather.main.temp_min)}°C / ${Math.round(weather.main.temp_max)}°C`;
+
+    let sunset = document.querySelector('.Current .Pocit');
+    sunset.innerText = `Pocitová teplota: ${Math.round(weather.main.feels_like)}°C`;
+
+    let vetor = document.querySelector('.Current .vetor');
+    vetor.innerText = `Rýchlosť vetra: ${Math.round(weather.wind.speed)}m/s`;
+
+    let aktual = document.querySelector('.Current .Aktualna');
+    aktual.innerText = weather.weather[0].description;
 }
 
 function dateBuilder(d){
@@ -48,5 +61,11 @@ function dateBuilder(d){
     let month = months[d.getMonth()];
     let year = d.getFullYear();
   
-    return `${day} ${date} ${month} ${year}`;
+    return `${day} / ${date} / ${month} / ${year}`;
+}
+function timeBuilder(d){
+    let hours = d.getHours();
+    let minutes = d.getMinutes();
+
+    return`${hours}:${minutes}`;
 }

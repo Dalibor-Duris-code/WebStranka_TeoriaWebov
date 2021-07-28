@@ -11,25 +11,36 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     </head>
     <body>
-        <div class="app-wrap">
+        <div class="app-wrap">       
+                <div class="topnav">
+                    <a class="Den" >Pondelok / 10 / Júl / 2021</a>
+                    <a class="Cas" >14:53</a>
+                  </div>
                 <header>
-                    <input type="text" autocomplete="off" class="search-box" placeholder="Vyhľadávanie...">
+                    <input id="inpKey" type="text" autocomplete="off" class="search-box" placeholder="Zadajte mesto...">
                 </header>
+
                 <main>
                     <section class="Poloha">
                         <div class="Mesto"> Bratislava, SK</div>
-                        <div class="Den"> Pondelok 10 Júl 2021</div>
                     </section>
                     <div class="Current">
                             <div class="Teplota">15<span>°C</span></div>
-                            <div class="Pocasie">Slnečno</div>
-                            <div class="Naj-Min">13°C / 28°C</div>
-                        </div>
-                </main>
-        </div>
+                            <div class="Aktualna">Slnečno</span></div>
+                            <img src="https://openweathermap.org/img/wn/04n.png" alt="" class="Icon"/>
+                            <div class="Naj-Min">13°C | 28°C</div>
+                            <div class="Pocit">Pocitová teplota: 13°C</div>
+                            <div class="vetor">Rýchlosť vetra: 13m/s</div>
+                    </div>
+                      </body>
+                   
+                    </div>
+                </main>      
+            </div>
+           
         <script src="script.js" async defer></script>
     </body>
 </html>
